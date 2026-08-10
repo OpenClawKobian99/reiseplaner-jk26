@@ -378,6 +378,7 @@ if(location.hash)openTo(location.hash.slice(1));
 .ix-chk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid #31445c;background:#0d141c;
   display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;margin-right:2px;color:#0f0}
 .ix-chk[data-on="1"]{background:#137333;border-color:#1a9c46}
+.ix-chk[data-pend="1"]{background:#2563eb;border-color:#4b83f0}
 .card.ix-done>summary .ttl{opacity:.5;text-decoration:line-through}
 .card.ix-done{border-color:#1a9c46}
 .ix-moved{outline:2px dashed #e8c05a;outline-offset:-2px}
@@ -410,6 +411,11 @@ body{padding-bottom:76px}
  var GROUPS=[{id:"t1",t:"T1 · „Vor der Haustür“ — Shinjuku"},{id:"t2",t:"T2 · „Kawaii & Crossing“ — Meiji / Harajuku / Shibuya"},{id:"t3",t:"T3 · „Tempel & Neon“ — Asakusa / Ueno / Akihabara"},{id:"t4",t:"T4 · „Buddha & Beach“ — Strandtag Kamakura"},{id:"t5",t:"T5 · „Markt, Kunst & Bucht“ — Tsukiji → Ginza → teamLab → Odaiba"},{id:"t6",t:"T6 · „Der Joker“ — vier Optionen"},{id:"tv",t:"„Viertel-Menü“ — weiter draußen, lohnt die Fahrt"},{id:"tf",t:"„Food-Joker“ Tokio — frei einplanbar"},{id:"tt",t:"„Reserve“ — weitere Tagestrip-Ideen"},{id:"o0",t:"K0 · „Ankommen“ — Umeda & erste Neon-Runde"},{id:"o1",t:"K1 · „Neon-Nächte“ — Osaka Stadt"},{id:"o2",t:"K2 · „Tempel-Marathon“ — Kyoto (fix)"},{id:"o3",t:"K3 · „Rehe & Bambus“ — Nara + Arashiyama"},{id:"o4",t:"K4 · „Burg & Beef“ — Himeji + Kobe"},{id:"o5",t:"K5 · „Sayonara Osaka“ — letzter Vormittag"},{id:"b0",t:"B0 · „Ankunft & Strand“ — Haeundae"},{id:"b1",t:"B1 · „Stadt & Aussicht“ — Busan komplett"},{id:"s0",t:"S0 · „Ankunft“ — Hongdae"},{id:"s1",t:"S1 · „Altstadt-Ost & Baseball“"},{id:"s2",t:"S2 · „Palast-Klassiker“"},{id:"s3",t:"S3 · „Konkuk & Seongsu“ — Philips Revier"},{id:"s4",t:"S4 · „Markt & Turm“"},{id:"s5",t:"S5 · „Der letzte Tag“ — Incheon"},{id:"sv",t:"„Seoul-Menü“ — frei einplanbar"}], KEY="urlaub-planer-v1";
  var SITE="https://openclawkobian99.github.io/reiseplaner-jk26/";
  var S=JSON.parse(localStorage.getItem(KEY)||'{"done":{},"notes":{},"moved":{}}');
+ // Gemeinsamer Stand, den Kai nach jedem Update ins Repo schreibt.
+ // Beide Handys lesen ihn beim Öffnen -> Benni sieht, was Philip abgehakt hat.
+ var SHARED={done:{},updated:null};
+ function isDone(id){return !!(S.done[id]||SHARED.done[id]);}
+ function isPending(id){return !!(S.done[id]&&!SHARED.done[id]);}
  function save(){localStorage.setItem(KEY,JSON.stringify(S));paint();}
  function cardName(c){var t=c.querySelector(".ttl");if(!t)return c.id;
    var x=t.cloneNode(true);var s=x.querySelector("small");if(s)s.remove();
@@ -454,17 +460,24 @@ body{padding-bottom:76px}
  function paint(){
    document.querySelectorAll("details.card").forEach(function(c){
      var id=c.id.replace(/^c-/,"");
-     var on=!!S.done[id];
-     if(c.__chk){c.__chk.dataset.on=on?"1":"0";c.__chk.textContent=on?"✓":"";}
+     var on=isDone(id), pend=isPending(id);
+     if(c.__chk){c.__chk.dataset.on=on?"1":"0";c.__chk.dataset.pend=pend?"1":"0";
+       c.__chk.textContent=on?"✓":"";
+       c.__chk.title=pend?"abgehakt, aber noch nicht an Kai geschickt":(on?"bestätigt":"");}
      c.classList.toggle("ix-done",on);
      c.classList.toggle("ix-moved",!!S.moved[id]);
    });
    paintBar();
  }
  function paintBar(){
-   var d=Object.keys(S.done).length,m=Object.keys(S.moved).length,n=Object.keys(S.notes).length;
+   var all={},k;
+   for(k in SHARED.done)all[k]=1; for(k in S.done)all[k]=1;
+   var total=Object.keys(all).length;
+   var pend=Object.keys(S.done).filter(function(x){return !SHARED.done[x];}).length
+            +Object.keys(S.moved).length+Object.keys(S.notes).length;
    document.getElementById("ix-count").textContent=
-     d+" abgehakt · "+m+" verschoben · "+n+" Notiz"+(n===1?"":"en");
+     total+" abgehakt"+(SHARED.updated?" (Stand "+SHARED.updated+")":"")+
+     (pend?" · "+pend+" noch nicht gesendet":" · alles gesendet");
  }
 
  function payload(){
@@ -538,6 +551,12 @@ body{padding-bottom:76px}
    save();
  });
  paint();
+
+ // Gemeinsamen Stand nachladen (Cache umgehen, sonst zeigt iOS tagelang alte Daten)
+ fetch("state.json?cb="+Date.now(),{cache:"no-store"})
+   .then(function(r){return r.ok?r.json():null;})
+   .then(function(j){if(!j)return;SHARED.done=j.done||{};SHARED.updated=j.updated||null;paint();})
+   .catch(function(){});
 })();
 </script>
 </body></html>
