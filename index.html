@@ -394,6 +394,13 @@ if(location.hash)openTo(location.hash.slice(1));
 .ix-send{background:#2563eb;color:#fff;border:0;border-radius:11px;padding:11px 15px;font-size:14px;font-weight:700}
 .ix-reset{background:#1a2430;color:#8fa3b8;border:1px solid #31445c;border-radius:11px;padding:11px 12px;font-size:13px}
 body{padding-bottom:76px}
+.ix-ov{position:fixed;inset:0;z-index:200;background:#000a;display:flex;align-items:center;justify-content:center;padding:16px}
+.ix-modal{background:#101821;border:1px solid #2e4256;border-radius:16px;padding:16px;max-width:560px;width:100%}
+.ix-modal h3{margin:0 0 4px;font-size:16px}
+.ix-modal p{margin:0 0 10px;color:#8fa3b8;font-size:13px}
+.ix-out{width:100%;height:190px;background:#0d141c;color:#e7eef6;border:1px solid #2e4256;border-radius:11px;padding:10px;font:13px/1.4 ui-monospace,monospace;resize:vertical}
+.ix-mbtns{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+.ix-mbtns .ix-send{text-decoration:none;text-align:center;display:inline-block}
 .ix-toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#137333;color:#fff;
   padding:10px 16px;border-radius:11px;font-size:14px;z-index:100;max-width:90%;text-align:center}
 </style>
@@ -401,6 +408,7 @@ body{padding-bottom:76px}
 <script id="ix-js">
 (function(){
  var GROUPS=[{id:"t1",t:"T1 · „Vor der Haustür“ — Shinjuku"},{id:"t2",t:"T2 · „Kawaii & Crossing“ — Meiji / Harajuku / Shibuya"},{id:"t3",t:"T3 · „Tempel & Neon“ — Asakusa / Ueno / Akihabara"},{id:"t4",t:"T4 · „Buddha & Beach“ — Strandtag Kamakura"},{id:"t5",t:"T5 · „Markt, Kunst & Bucht“ — Tsukiji → Ginza → teamLab → Odaiba"},{id:"t6",t:"T6 · „Der Joker“ — vier Optionen"},{id:"tv",t:"„Viertel-Menü“ — weiter draußen, lohnt die Fahrt"},{id:"tf",t:"„Food-Joker“ Tokio — frei einplanbar"},{id:"tt",t:"„Reserve“ — weitere Tagestrip-Ideen"},{id:"o0",t:"K0 · „Ankommen“ — Umeda & erste Neon-Runde"},{id:"o1",t:"K1 · „Neon-Nächte“ — Osaka Stadt"},{id:"o2",t:"K2 · „Tempel-Marathon“ — Kyoto (fix)"},{id:"o3",t:"K3 · „Rehe & Bambus“ — Nara + Arashiyama"},{id:"o4",t:"K4 · „Burg & Beef“ — Himeji + Kobe"},{id:"o5",t:"K5 · „Sayonara Osaka“ — letzter Vormittag"},{id:"b0",t:"B0 · „Ankunft & Strand“ — Haeundae"},{id:"b1",t:"B1 · „Stadt & Aussicht“ — Busan komplett"},{id:"s0",t:"S0 · „Ankunft“ — Hongdae"},{id:"s1",t:"S1 · „Altstadt-Ost & Baseball“"},{id:"s2",t:"S2 · „Palast-Klassiker“"},{id:"s3",t:"S3 · „Konkuk & Seongsu“ — Philips Revier"},{id:"s4",t:"S4 · „Markt & Turm“"},{id:"s5",t:"S5 · „Der letzte Tag“ — Incheon"},{id:"sv",t:"„Seoul-Menü“ — frei einplanbar"}], KEY="urlaub-planer-v1";
+ var SITE="https://openclawkobian99.github.io/reiseplaner-jk26/";
  var S=JSON.parse(localStorage.getItem(KEY)||'{"done":{},"notes":{},"moved":{}}');
  function save(){localStorage.setItem(KEY,JSON.stringify(S));paint();}
  function cardName(c){var t=c.querySelector(".ttl");if(!t)return c.id;
@@ -484,13 +492,43 @@ body{padding-bottom:76px}
    '<button class="ix-send" id="ix-send">📤 An Kai</button>';
  document.body.appendChild(bar);
 
+ // Ausweg-Dialog: Text zum Kopieren + direkter Telegram-Link.
+ // Wird gebraucht, weil der t.me-Deeplink am iPhone nicht zuverlässig aufgeht
+ // (Philip 10.08.2026) — Teilen-Dialog des Systems ist der verlässliche Weg.
+ function showBox(txt){
+   var ov=document.createElement("div"); ov.className="ix-ov";
+   var tg="https://t.me/share/url?url="+encodeURIComponent(SITE)+"&text="+encodeURIComponent(txt);
+   ov.innerHTML='<div class="ix-modal"><h3>Update an Kai</h3>'+
+     '<p>Text markieren und kopieren, dann in die Gruppe einfügen — oder einen der Knöpfe nehmen.</p>'+
+     '<textarea class="ix-out" readonly></textarea>'+
+     '<div class="ix-mbtns">'+
+       '<button class="ix-send" id="ix-copy">Kopieren</button>'+
+       '<a class="ix-send" href="'+tg+'" target="_blank" rel="noopener">In Telegram öffnen</a>'+
+       '<button class="ix-reset" id="ix-close">Schließen</button>'+
+     '</div></div>';
+   document.body.appendChild(ov);
+   var ta=ov.querySelector(".ix-out"); ta.value=txt;
+   ov.querySelector("#ix-copy").addEventListener("click",function(){
+     ta.focus(); ta.setSelectionRange(0,ta.value.length);
+     var ok=false; try{ok=document.execCommand("copy");}catch(e){}
+     if(!ok&&navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Kopiert.");});
+     else toast(ok?"Kopiert.":"Bitte von Hand markieren und kopieren.");
+   });
+   ov.querySelector("#ix-close").addEventListener("click",function(){ov.remove();});
+   ov.addEventListener("click",function(e){if(e.target===ov)ov.remove();});
+ }
+
  document.getElementById("ix-send").addEventListener("click",function(){
    var txt=payload();
-   if(navigator.clipboard)navigator.clipboard.writeText(txt).catch(function(){});
-   var u="https://t.me/share/url?url="+encodeURIComponent("")+"&text="+encodeURIComponent(txt);
-   if(u.length>7000){toast("Zu viel auf einmal — Text liegt in der Zwischenablage, bitte in Telegram einfügen.");return;}
-   toast("Telegram öffnet sich — Gruppe wählen und senden.");
-   setTimeout(function(){location.href=u;},400);
+   // Systemeigener Teilen-Dialog — direkt im Klick, ohne setTimeout, sonst
+   // wertet iOS es nicht mehr als Nutzeraktion und blockt.
+   if(navigator.share){
+     navigator.share({title:"Planer-Update",text:txt})
+       .then(function(){toast("Geteilt — in Telegram die Gruppe wählen.");})
+       .catch(function(){showBox(txt);});
+     return;
+   }
+   showBox(txt);
  });
  document.getElementById("ix-reset").addEventListener("click",function(){
    if(!confirm("Alle Haken, Notizen und Verschiebungen löschen?"))return;
