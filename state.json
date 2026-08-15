@@ -1,11 +1,5 @@
 {
-  "updated": "10.08. abends",
-  "note": "Gemeinsamer Stand, gepflegt von Kai nach jedem PLANER-UPDATE aus der App.",
-  "done": {
-    "t1-2": 1,
-    "t2-1": 1,
-    "t2-4": 1,
-    "t1-1": 1,
-    "tv-1": 1
-  }
+  "updated": "15.08.2026",
+  "note": "Nach dem grossen Nachpflege-Umbau zurueckgesetzt: die Tokio-Gruppen wurden neu strukturiert, damit verschieben sich die positionsbasierten Spot-IDs (c-<gruppe>-<nr>). Alte Haken waeren auf falsche Spots gefallen. Erledigtes steht jetzt direkt im Spot-Text (Praefix ✅).",
+  "done": {}
 }
