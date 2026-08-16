@@ -62,6 +62,10 @@ details[open]>summary>.chev{transform:rotate(90deg)}
 .wxpanel svg{display:block;width:100%;height:auto}
 .wxax{display:flex;justify-content:space-between;color:#5b6d80;font-size:10px;margin-top:1px}
 .wxfoot{color:#5b6d80;font-size:10.5px;margin:8px 0 0}
+.wxbtn{margin:8px 0 0;background:#1a2430;color:#a8bdd2;border:1px solid #2e4256;border-radius:10px;
+  padding:7px 12px;font:600 12.5px inherit;cursor:pointer}
+.wxbtn:disabled{opacity:.6;cursor:default}
+.wxbtn.done{border-color:#1a9c46;color:#7fd6a0}
 .wxdry{color:#6f8aa5;font-size:12px;margin:4px 0 0}
 .gbody{padding:0 10px 10px}
 .sub{margin:2px 2px 10px;color:#8fa3b8;font-size:13px}
@@ -133,7 +137,8 @@ footer{color:#5b6d80;font-size:12px;text-align:center;padding:24px 16px 0}
 <header><h1>🧳 Japan/Korea — Abend-Planer</h1>
 <p>Für die „Was machen wir morgen?“-Runde: Stadt antippen → Tag antippen → Spots &amp; 🍽 Essen in der Gegend. Karte pro Tag (🏨 = euer Hotel, eckige türkise Pins = Essen), ⭐ = vorab buchen. Funktioniert komplett offline.</p>
 <p>Spot-Typen: ⛩ Schrein · 🛕 Tempel · 🏯 Burg/Palast · 🌳 Park/Garten · 🌆 Aussicht · 🏖 Strand · 🛒 Markt · 🛍 Shopping · 🏘 Viertel · 🎨 Kunst/Museum · 🎢 Freizeitpark — Spezielles spricht für sich (🦌 🐉 👘 🗿 …). Auf den Karten zeigen die Pins dasselbe Emoji, die kleine Nummer am Pin ist die Position in der Liste darunter (🍽 = Essen, türkis).</p>
-<p class="wxnote" id="wxstamp">🌦 Wetter wird geladen …</p></header>
+<p class="wxnote" id="wxstamp">🌦 Wetter wird geladen …</p>
+<button class="wxbtn" id="wxall" type="button">🌧 Alle Stundenwerte laden</button></header>
 <main><details class="city" id="tokio"><summary><span class="cem">🗼</span><span class="cttl">Tokio<small>09.–16.08. · 10 Tage/Gruppen · 59 Spots (davon 9 🍽)</small></span><span class="chev">▸</span></summary><div class="cbody">
 <details class="grp" id="g-t1"><summary><span class="ghead"><span class="dot" style="background:#e4573d"></span><span class="gttl"><span class="gday">Montag, 10.08.<span class="wx" data-d="2026-08-10" data-la="35.6938" data-lo="139.7034" data-o="Shinjuku"></span></span> T1 · „Vor der Haustür“ — Shinjuku<small>5 Spots</small></span><span class="chev">▸</span></span></summary><div class="gbody">
 <p class="sub">Mo 10.08. (jetlag-schonend). Alles fußläufig/1 Bahn vom Hotel. Gyoen liegt jetzt auf T2 (montags zu) — dafür startet ihr entspannt im Yoyogi Park.</p>
@@ -451,7 +456,8 @@ if(location.hash)openTo(location.hash.slice(1));
   var days=els.map(function(e){return e.dataset.d}).sort();
   var today=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
   var start=days[0]<today?today:days[0], end=days[days.length-1];
-  if(end<start){note('Reise vorbei — kein Wetter mehr nötig 🙂');return}
+  if(end<start){note('Reise vorbei — kein Wetter mehr nötig 🙂');
+    var b0=document.getElementById('wxall'); if(b0)b0.style.display='none'; return}
   var url='https://api.open-meteo.com/v1/forecast?latitude='+locs.map(function(l){return l[0]}).join(',')
     +'&longitude='+locs.map(function(l){return l[1]}).join(',')
     +'&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max'
@@ -494,7 +500,51 @@ if(location.hash)openTo(location.hash.slice(1));
      Temperatur-Kurve und Niederschlags-Balken je Stunde. Die Stundendaten
      werden erst beim Klick geholt (ein Tag, ein Ort) — sonst wäre der
      Erst-Request riesig. */
-  var HCACHE={};
+  /* Stundenwerte werden kompakt gehalten ({t:[24],r:[24],p:[24],o:offset}) —
+     so passt auch der komplette Vorrat für alle Tage in den localStorage. */
+  var HCACHE={}, HK='wx-hourly-v1', HTTL=6*36e5;
+  try{var hc=JSON.parse(localStorage.getItem(HK)||'null');
+      if(hc&&hc.d&&Date.now()-hc.t<HTTL)HCACHE=hc.d}catch(e){}
+  function saveH(){try{localStorage.setItem(HK,JSON.stringify({t:Date.now(),d:HCACHE}))}catch(e){}}
+  function slice24(h,i0,off){
+    return {t:h.temperature_2m.slice(i0,i0+24), r:h.precipitation.slice(i0,i0+24),
+            p:h.precipitation_probability?h.precipitation_probability.slice(i0,i0+24):null, o:off};
+  }
+  function hkey(e){return e.dataset.la+','+e.dataset.lo+','+e.dataset.d}
+
+  /* Knopf oben: holt alle Tage/Orte in EINEM Request vorab (Philip 16.08.2026).
+     Danach öffnen die Panels ohne Wartezeit — und funktionieren auch offline. */
+  var btn=document.getElementById('wxall');
+  function btnIdle(){
+    if(!btn)return;
+    var n=Object.keys(HCACHE).length;
+    btn.disabled=false;
+    btn.classList.toggle('done',n>0);
+    btn.textContent=n?'✅ Stundenwerte da ('+n+' Tage) — neu laden':'🌧 Alle Stundenwerte laden';
+  }
+  if(btn){
+    btnIdle();
+    btn.addEventListener('click',function(){
+      btn.disabled=true; btn.classList.remove('done'); btn.textContent='⏳ Lade Stundenwerte …';
+      fetch('https://api.open-meteo.com/v1/forecast?latitude='+locs.map(function(l){return l[0]}).join(',')
+            +'&longitude='+locs.map(function(l){return l[1]}).join(',')
+            +'&hourly=temperature_2m,precipitation,precipitation_probability&timezone=auto'
+            +'&start_date='+start+'&end_date='+end)
+        .then(function(r){return r.json()}).then(function(d){
+          var arr=Array.isArray(d)?d:[d];
+          els.forEach(function(e){
+            if(!e.textContent)return;
+            var loc=arr[idx[e.dataset.la+','+e.dataset.lo]];
+            if(!loc||!loc.hourly)return;
+            var i0=loc.hourly.time.indexOf(e.dataset.d+'T00:00');
+            if(i0<0)return;
+            HCACHE[hkey(e)]=slice24(loc.hourly,i0,loc.utc_offset_seconds);
+          });
+          saveH(); btnIdle();
+        }).catch(function(){btn.disabled=false;btn.textContent='⚠ Ging nicht — nochmal versuchen'});
+    });
+  }
+
   els.forEach(function(e){
     e.classList.add('tap');
     e.setAttribute('role','button');
@@ -511,20 +561,23 @@ if(location.hash)openTo(location.hash.slice(1));
       host.__wxp=p;
       if(e.classList.contains('sm'))host.parentNode.insertBefore(p,host.nextSibling);
       else host.appendChild(p);
-      var k=e.dataset.la+','+e.dataset.lo+','+e.dataset.d;
+      var k=hkey(e);
       if(HCACHE[k]){draw(p,HCACHE[k],e);return}
       fetch('https://api.open-meteo.com/v1/forecast?latitude='+e.dataset.la+'&longitude='+e.dataset.lo
             +'&hourly=temperature_2m,precipitation,precipitation_probability&timezone=auto'
             +'&start_date='+e.dataset.d+'&end_date='+e.dataset.d)
-        .then(function(r){return r.json()}).then(function(d){HCACHE[k]=d;draw(p,d,e)})
+        .then(function(r){return r.json()}).then(function(d){
+          if(!d.hourly)throw 0;
+          HCACHE[k]=slice24(d.hourly,0,d.utc_offset_seconds); saveH(); btnIdle();
+          draw(p,HCACHE[k],e);
+        })
         .catch(function(){p.innerHTML='<p class="wxdry">Stundenwerte gerade nicht abrufbar.</p>'});
     });
   });
 
-  function draw(p,d,e){
-    var h=d&&d.hourly;
-    if(!h||!h.time||!h.time.length){p.innerHTML='<p class="wxdry">Für diesen Tag gibt es keine Stundenwerte.</p>';return}
-    var T=h.temperature_2m, R=h.precipitation, P=h.precipitation_probability;
+  function draw(p,c,e){
+    var T=c&&c.t, R=c&&c.r, P=c&&c.p;
+    if(!T||!T.length){p.innerHTML='<p class="wxdry">Für diesen Tag gibt es keine Stundenwerte.</p>';return}
     var n=T.length, W=300, sum=0, rmax=0, i;
     for(i=0;i<n;i++){sum+=R[i]||0; if((R[i]||0)>rmax)rmax=R[i]}
     var tmin=Math.min.apply(null,T), tmax=Math.max.apply(null,T);
@@ -548,8 +601,8 @@ if(location.hash)openTo(location.hash.slice(1));
     if(P)for(i=0;i<n;i++){pl+=(i?'L':'M')+xs(i).toFixed(1)+' '+(HR-(P[i]||0)/100*(HR-10)).toFixed(1)+' '}
     // "Jetzt"-Marker, wenn der Tag heute ist
     var nowx='', nowIso=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
-    if(e.dataset.d===nowIso&&d.utc_offset_seconds!=null){
-      var lh=new Date(Date.now()+d.utc_offset_seconds*1000).getUTCHours();
+    if(e.dataset.d===nowIso&&c.o!=null){
+      var lh=new Date(Date.now()+c.o*1000).getUTCHours();
       nowx='<line x1="'+xs(lh).toFixed(1)+'" y1="0" x2="'+xs(lh).toFixed(1)+'" y2="__H__" stroke="#e8c05a" stroke-width="1" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"></line>';
     }
     var ax='<div class="wxax"><span>0</span><span>6</span><span>12</span><span>18</span><span>24 Uhr</span></div>';
