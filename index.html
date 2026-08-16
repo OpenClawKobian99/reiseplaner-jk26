@@ -66,6 +66,17 @@ details[open]>summary>.chev{transform:rotate(90deg)}
   padding:7px 12px;font:600 12.5px inherit;cursor:pointer}
 .wxbtn:disabled{opacity:.6;cursor:default}
 .wxbtn.done{border-color:#1a9c46;color:#7fd6a0}
+/* Kurz-Anleitung oben (Philip 16.08.2026 — „vor allem für meinen Vater und Familie") */
+.tut{margin:8px 0 0}
+.tut>summary{display:inline-block;background:#1a2430;color:#a8bdd2;border:1px solid #2e4256;
+  border-radius:10px;padding:7px 12px;font:600 12.5px inherit}
+.tut[open]>summary{border-color:#3d6d9e;color:#cfe0f2}
+.tutbody{margin-top:9px;background:#131c26;border:1px solid #22303f;border-radius:12px;padding:12px 14px}
+.tutbody h4{margin:13px 0 2px;font-size:13px;color:#e8c05a}
+.tutbody p{margin:3px 0;color:#a8bdd2;font-size:13.5px;line-height:1.5}
+.tutbody b{color:#dde6ef}
+#legende{max-width:720px;margin:0 auto;padding:14px 16px 0;scroll-margin-top:60px}
+#legende p{color:#8fa3b8;font-size:12.5px;margin:6px 0 0;line-height:1.6}
 .wxdry{color:#6f8aa5;font-size:12px;margin:4px 0 0}
 .gbody{padding:0 10px 10px}
 .sub{margin:2px 2px 10px;color:#8fa3b8;font-size:13px}
@@ -136,9 +147,21 @@ footer{color:#5b6d80;font-size:12px;text-align:center;padding:24px 16px 0}
 <nav><a href="#tokio">🗼 Tokio</a><a href="#osaka">🏯 Osaka</a><a href="#busan">🌊 Busan</a><a href="#seoul">🏙 Seoul</a><a href="#uebersicht">📊 Übersicht</a><a href="#kalender">📅 Kalender</a></nav>
 <header><h1>🧳 Japan/Korea — Abend-Planer</h1>
 <p>Für die „Was machen wir morgen?“-Runde: Stadt antippen → Tag antippen → Spots &amp; 🍽 Essen in der Gegend. Karte pro Tag (🏨 = euer Hotel, eckige türkise Pins = Essen), ⭐ = vorab buchen. Funktioniert komplett offline.</p>
-<p>Spot-Typen: ⛩ Schrein · 🛕 Tempel · 🏯 Burg/Palast · 🌳 Park/Garten · 🌆 Aussicht · 🏖 Strand · 🛒 Markt · 🛍 Shopping · 🏘 Viertel · 🎨 Kunst/Museum · 🎢 Freizeitpark — Spezielles spricht für sich (🦌 🐉 👘 🗿 …). Auf den Karten zeigen die Pins dasselbe Emoji, die kleine Nummer am Pin ist die Position in der Liste darunter (🍽 = Essen, türkis).</p>
 <p class="wxnote" id="wxstamp">🌦 Wetter wird geladen …</p>
-<button class="wxbtn" id="wxall" type="button">🌧 Alle Stundenwerte laden</button></header>
+<button class="wxbtn" id="wxall" type="button">🌧 Alle Stundenwerte laden</button>
+<details class="tut"><summary>❓ Wie benutze ich den Planer?</summary><div class="tutbody">
+<p><b>Das Wichtigste zuerst:</b> Das hier ist kein starrer Zeitplan, sondern eine Auswahl. Für jeden Reisetag steht eine Liste mit Vorschlägen — man nimmt sich raus, worauf man Lust hat. Mehr Einträge heißen mehr Auswahl, nicht mehr Stress.</p>
+<h4>So findest du dich zurecht</h4>
+<p>Stadt antippen → darunter den Tag antippen → einen Spot antippen. Über jedem Tag steht der <b>Wochentag und das Datum</b>. Beim Spot findest du Foto, kurze Erklärung, Öffnungszeiten und Preis.</p>
+<h4>Das Wetter</h4>
+<p>Neben jedem Datum steht das Wetter für genau <b>diesen Ort</b> — nicht für die Stadt allgemein. Tippst du es an, klappt der Tagesverlauf auf: wann es wie warm wird und wann wie viel Regen fällt. Der Knopf <b>„Alle Stundenwerte laden"</b> holt alles auf einmal; danach geht es auch ohne Internet.</p>
+<h4>Die Karte</h4>
+<p>Jeder Tag hat eine eigene Karte. Die <b>Nummer am Pin</b> ist dieselbe wie in der Liste darunter. 🏨 ist das Hotel, türkise eckige Pins sind Restaurants. Der grüne Knopf öffnet den ganzen Tag als fertige Route in Google Maps.</p>
+<h4>Zeichen, auf die es ankommt</h4>
+<p><b>⭐ muss vorher gebucht werden.</b> ⚠ ist eine Warnung, meist ein Ruhetag oder eine Sperrung. 🍽 ist Essen in der Nähe.</p>
+<h4>Ganz unten</h4>
+<p>📊 zeigt, wie voll jeder Tag schon ist. 📅 zeigt, wann wir in welcher Stadt sind. Darunter steht, was die kleinen Symbole vor den Namen bedeuten.</p>
+</div></details></header>
 <main><details class="city" id="tokio"><summary><span class="cem">🗼</span><span class="cttl">Tokio<small>09.–16.08. · 10 Tage/Gruppen · 59 Spots (davon 9 🍽)</small></span><span class="chev">▸</span></summary><div class="cbody">
 <details class="grp" id="g-t1"><summary><span class="ghead"><span class="dot" style="background:#e4573d"></span><span class="gttl"><span class="gday">Montag, 10.08.<span class="wx" data-d="2026-08-10" data-la="35.6938" data-lo="139.7034" data-o="Shinjuku"></span></span> T1 · „Vor der Haustür“ — Shinjuku<small>5 Spots</small></span><span class="chev">▸</span></span></summary><div class="gbody">
 <p class="sub">Mo 10.08. (jetlag-schonend). Alles fußläufig/1 Bahn vom Hotel. Gyoen liegt jetzt auf T2 (montags zu) — dafür startet ihr entspannt im Yoyogi Park.</p>
@@ -419,6 +442,8 @@ footer{color:#5b6d80;font-size:12px;text-align:center;padding:24px 16px 0}
 </div></details></main>
 <section id="uebersicht"><details class="city"><summary><span class="cem">📊</span><span class="cttl">Wie voll sind die Tage?<small>Zeit belegt inkl. Wegzeiten · 137 Aktivitäten gesamt</small></span><span class="chev">▸</span></summary><div class="cbody"><div class="ov"><span class="ovrow travel"><span class="ovdate">So 09.08.</span><span class="ovcity">✈</span><span class="ovttl trav">Ankunft Tokio — NRT 17:35 · Hotel ~20:30 · nur noch Abend (Konbini, kurzer Bummel)</span></span><a class="ovrow" href="#g-t1"><span class="ovdate">Mo 10.08.<span class="wx sm" data-d="2026-08-10" data-la="35.6938" data-lo="139.7034" data-o="Shinjuku" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T1 · „Vor der Haustür“ — Shinjuku</span><span class="ovbar"><span style="width:42%"></span></span><span class="ovcount">~5,5/13h</span></a><a class="ovrow" href="#g-t2"><span class="ovdate">Di 11.08.<span class="wx sm" data-d="2026-08-11" data-la="35.7101" data-lo="139.8107" data-o="Asakusa" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T2 · „Skytree & Ost-Tokio“ — Oshiage / Asakusa</span><span class="ovbar"><span style="width:65%"></span></span><span class="ovcount">~8,5/13h</span></a><a class="ovrow" href="#g-t3"><span class="ovdate">Mi 12.08.<span class="wx sm" data-d="2026-08-12" data-la="35.7138" data-lo="139.777" data-o="Ueno" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T3 · „Waschtag“ — alles unter Dach: Ueno / Akihabara / Shibuya Sky</span><span class="ovbar"><span style="width:54%"></span></span><span class="ovcount">~7/13h</span></a><a class="ovrow" href="#g-t4"><span class="ovdate">Do 13.08.<span class="wx sm" data-d="2026-08-13" data-la="35.4437" data-lo="139.638" data-o="Yokohama" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T4 · „Hafen & Nudeln“ — Yokohama</span><span class="ovbar"><span style="width:62%"></span></span><span class="ovcount">~8/13h</span></a><a class="ovrow" href="#g-t5"><span class="ovdate">Fr 14.08.<span class="wx sm" data-d="2026-08-14" data-la="35.628" data-lo="139.776" data-o="Odaiba" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T5 · „Markt, Kunst & Bucht“ — Tsukiji → Ginza → teamLab → Odaiba</span><span class="ovbar"><span style="width:73%"></span></span><span class="ovcount">~9,5/13h</span></a><a class="ovrow" href="#g-t6"><span class="ovdate">Sa 15.08.<span class="wx sm" data-d="2026-08-15" data-la="36.7199" data-lo="139.6982" data-o="Nikko" data-c="1"></span></span><span class="ovcity">🗼</span><span class="ovttl">T6 · „Shogun-Grab im Zedernwald“ — Tagestrip Nikko</span><span class="ovbar"><span style="width:0%"></span></span><span class="ovcount">Joker</span></a><a class="ovrow" href="#g-tk"><span class="ovdate">—</span><span class="ovcity">🗼</span><span class="ovttl">🎬 Kabukicho-Drehorte — optional, vor der Haustür</span><span class="ovbar"><span style="width:67%"></span></span><span class="ovcount">8 Spots</span></a><a class="ovrow" href="#g-tt"><span class="ovdate">nicht geschafft</span><span class="ovcity">🗼</span><span class="ovttl">⏳ „Nicht geschafft“ — was diese Reise liegen blieb</span><span class="ovbar"><span style="width:58%"></span></span><span class="ovcount">7 Spots</span></a><span class="ovrow travel"><span class="ovdate">So 16.08.</span><span class="ovcity">🚄</span><span class="ovttl trav">Shinkansen 09:12→11:39 Shin-Osaka · Gepäck ins Hotel, ab ~13 Uhr in der Stadt (~8 h) → Programm s. K0</span></span><a class="ovrow" href="#g-o0"><span class="ovdate">So 16.08.<span class="wx sm" data-d="2026-08-16" data-la="34.7055" data-lo="135.4983" data-o="Osaka" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K0 · „Ankommen“ — Umeda & erste Neon-Runde</span><span class="ovbar"><span style="width:62%"></span></span><span class="ovcount">~5/8h</span></a><a class="ovrow" href="#g-o1"><span class="ovdate">Mo 17.08.<span class="wx sm" data-d="2026-08-17" data-la="34.6687" data-lo="135.5013" data-o="Osaka" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K1 · „Neon-Nächte“ — Osaka Stadt</span><span class="ovbar"><span style="width:42%"></span></span><span class="ovcount">~5,5/13h</span></a><a class="ovrow full" href="#g-o2"><span class="ovdate">Di 18.08.<span class="wx sm" data-d="2026-08-18" data-la="35.0116" data-lo="135.7681" data-o="Kyoto" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K2 · „Tempel-Marathon“ — Kyoto (fix)</span><span class="ovbar"><span style="width:85%"></span></span><span class="ovcount">~11/13h</span></a><a class="ovrow" href="#g-o3"><span class="ovdate">Mi 19.08.<span class="wx sm" data-d="2026-08-19" data-la="34.6851" data-lo="135.8048" data-o="Nara" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K3 · „Rehe & Bambus“ — Nara + Arashiyama</span><span class="ovbar"><span style="width:73%"></span></span><span class="ovcount">~9,5/13h</span></a><a class="ovrow" href="#g-o4"><span class="ovdate">Do 20.08.<span class="wx sm" data-d="2026-08-20" data-la="34.8394" data-lo="134.6939" data-o="Himeji" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K4 · „Burg & Beef“ — Himeji + Kobe</span><span class="ovbar"><span style="width:73%"></span></span><span class="ovcount">~9,5/13h</span></a><a class="ovrow" href="#g-o5"><span class="ovdate">Fr 21.08.<span class="wx sm" data-d="2026-08-21" data-la="34.7055" data-lo="135.4983" data-o="Osaka" data-c="1"></span></span><span class="ovcity">🏯</span><span class="ovttl">K5 · „Sayonara Osaka“ — letzter Vormittag</span><span class="ovbar"><span style="width:75%"></span></span><span class="ovcount">~3/4h</span></a><span class="ovrow travel"><span class="ovdate">Fr 21.08.</span><span class="ovcity">⛴</span><span class="ovttl trav">Fähre ab 17:00 (Check-in 15:00–16:00, Terminal Nanko) · Vormittag = K5 (~4 h)</span></span><a class="ovrow" href="#g-b0"><span class="ovdate">Sa 22.08.<span class="wx sm" data-d="2026-08-22" data-la="35.1587" data-lo="129.1604" data-o="Haeundae" data-c="1"></span></span><span class="ovcity">🌊</span><span class="ovttl">B0 · „Ankunft & Strand“ — Haeundae</span><span class="ovbar"><span style="width:61%"></span></span><span class="ovcount">~5,5/9h</span></a><a class="ovrow" href="#g-b1"><span class="ovdate">So 23.08.<span class="wx sm" data-d="2026-08-23" data-la="35.1" data-lo="129.033" data-o="Busan" data-c="1"></span></span><span class="ovcity">🌊</span><span class="ovttl">B1 · „Stadt & Aussicht“ — Busan komplett</span><span class="ovbar"><span style="width:58%"></span></span><span class="ovcount">~7,5/13h</span></a><span class="ovrow travel"><span class="ovdate">Mo 24.08.</span><span class="ovcity">🚆</span><span class="ovttl trav">✅ KTX026, Busan 10:28 → Seoul 13:04 (Wagen 3, Sitze 6B+6C) → Hotel/Lunch → S0-Abend. ⛔ 16:00–17:00 KST Arbeits-Call — Ruhe + WLAN</span></span><a class="ovrow" href="#g-s0"><span class="ovdate">Mo 24.08.<span class="wx sm" data-d="2026-08-24" data-la="37.5563" data-lo="126.9236" data-o="Hongdae" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S0 · „Ankunft“ — Hongdae</span><span class="ovbar"><span style="width:75%"></span></span><span class="ovcount">~3/4h</span></a><a class="ovrow" href="#g-s1"><span class="ovdate">Di 25.08.<span class="wx sm" data-d="2026-08-25" data-la="37.5729" data-lo="127.0" data-o="Seoul" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S1 · „Altstadt-Ost & Baseball“</span><span class="ovbar"><span style="width:65%"></span></span><span class="ovcount">~8,5/13h</span></a><a class="ovrow" href="#g-s2"><span class="ovdate">Mi 26.08.<span class="wx sm" data-d="2026-08-26" data-la="37.5796" data-lo="126.977" data-o="Seoul" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S2 · „Palast-Klassiker“</span><span class="ovbar"><span style="width:65%"></span></span><span class="ovcount">~8,5/13h</span></a><a class="ovrow" href="#g-s3"><span class="ovdate">Do 27.08.<span class="wx sm" data-d="2026-08-27" data-la="37.5445" data-lo="127.0557" data-o="Seongsu" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S3 · „Konkuk & Seongsu“ — Philips Revier</span><span class="ovbar"><span style="width:62%"></span></span><span class="ovcount">~8/13h</span></a><a class="ovrow" href="#g-s4"><span class="ovdate">Fr 28.08.<span class="wx sm" data-d="2026-08-28" data-la="37.5665" data-lo="126.978" data-o="Seoul" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S4 · „Markt & Turm“</span><span class="ovbar"><span style="width:73%"></span></span><span class="ovcount">~9,5/13h</span></a><a class="ovrow" href="#g-s5"><span class="ovdate">Sa 29.08.<span class="wx sm" data-d="2026-08-29" data-la="37.4602" data-lo="126.4407" data-o="Incheon" data-c="1"></span></span><span class="ovcity">🏙</span><span class="ovttl">S5 · „Der letzte Tag“ — Incheon</span><span class="ovbar"><span style="width:62%"></span></span><span class="ovcount">~5/8h</span></a><span class="ovrow travel"><span class="ovdate">So 30.08.</span><span class="ovcity">✈</span><span class="ovttl trav">Heimflug ICN 09:50 → FRA 16:50 → 🚄 Nürnberg 20:58</span></span></div><p class="ovhint">Balken = belegte Zeit vom verfügbaren Tagesfenster (volle Tage ~9–22 Uhr = 13 h, Reisetage ihr Restfenster), gerechnet in eurem Tempo inkl. Pausen. Antippen springt zum Tag. Die Spots pro Tag sind ein Menü — mehr Einträge heißt mehr Auswahl, nicht mehr Stress.</p></div></details></section>
 <section id="kalender"><p class="calttl">📅 August 2026</p><div class="cal"><span class="h">Mo</span><span class="h">Di</span><span class="h">Mi</span><span class="h">Do</span><span class="h">Fr</span><span class="h">Sa</span><span class="h">So</span><span class="cd off">3</span><span class="cd off">4</span><span class="cd off">5</span><span class="cd off">6</span><span class="cd" style="background:#6b7f95">7</span><span class="cd" style="background:#6b7f95">8</span><span class="cd" style="background:linear-gradient(135deg,#6b7f95 46%,#e4573d 54%)">9</span><span class="cd" style="background:#e4573d">10</span><span class="cd hol" style="background:#e4573d">11</span><span class="cd" style="background:#e4573d">12</span><span class="cd obn" style="background:#e4573d">13</span><span class="cd obn" style="background:#e4573d">14</span><span class="cd obn" style="background:#e4573d">15</span><span class="cd obn" style="background:linear-gradient(135deg,#e4573d 46%,#e69b2d 54%)">16</span><span class="cd" style="background:#e69b2d">17</span><span class="cd" style="background:#e69b2d">18</span><span class="cd" style="background:#e69b2d">19</span><span class="cd" style="background:#e69b2d">20</span><span class="cd" style="background:linear-gradient(135deg,#e69b2d 46%,#3d8be4 54%)">21</span><span class="cd" style="background:#3d8be4">22</span><span class="cd" style="background:#3d8be4">23</span><span class="cd" style="background:linear-gradient(135deg,#3d8be4 46%,#d84f8e 54%)">24</span><span class="cd" style="background:#d84f8e">25</span><span class="cd" style="background:#d84f8e">26</span><span class="cd" style="background:#d84f8e">27</span><span class="cd" style="background:#d84f8e">28</span><span class="cd" style="background:linear-gradient(135deg,#d84f8e 46%,#2db06f 54%)">29</span><span class="cd" style="background:linear-gradient(135deg,#2db06f 46%,#6b7f95 54%)">30</span></div><p class="callg"><i style="background:#e4573d"></i>Tokio <i style="background:#e69b2d"></i>Kansai <i style="background:#3d8be4"></i>Busan <i style="background:#d84f8e"></i>Seoul <i style="background:#2db06f"></i>Incheon <i style="background:#6b7f95"></i>An-/Abreise · 🎌 Goldring = Feiertag „Bergtag" (11.08.) · Punkt = Obon 13.–16. (Reise-Peak)</p></section>
+<section id="legende"><p class="calttl">🔤 Was die Symbole bedeuten</p>
+<p>⛩ Schrein · 🛕 Tempel · 🏯 Burg/Palast · 🌳 Park/Garten · 🌆 Aussicht · 🏖 Strand · 🛒 Markt · 🛍 Shopping · 🏘 Viertel · 🎨 Kunst/Museum · 🎢 Freizeitpark — Spezielles spricht für sich (🦌 🐉 👘 🗿 …). Auf den Karten zeigen die Pins dasselbe Emoji, die kleine Nummer am Pin ist die Position in der Liste darunter (🍽 = Essen, türkis).</p></section>
 <footer>Stand 29.07.2026 · Quelle: AKTE.md · Karten © OpenStreetMap · Fotos: Wikimedia Commons (eingebettet)</footer>
 <script>
 /* Optionales Komfort-JS — die Seite funktioniert auch komplett ohne
@@ -622,190 +647,4 @@ if(location.hash)openTo(location.hash.slice(1));
       +(nowx?' · goldene Linie = jetzt':'')+' · Ortszeit '+e.dataset.o+'</p>';
   }
 })();
-</script>
-<style id="ix-css">
-.ix-chk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid #31445c;background:#0d141c;
-  display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;margin-right:2px;color:#0f0}
-.ix-chk[data-on="1"]{background:#137333;border-color:#1a9c46}
-.ix-chk[data-pend="1"]{background:#2563eb;border-color:#4b83f0}
-.card.ix-done>summary .ttl{opacity:.5;text-decoration:line-through}
-.card.ix-done{border-color:#1a9c46}
-.ix-moved{outline:2px dashed #e8c05a;outline-offset:-2px}
-.ix-row{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
-.ix-row label{color:#8fa3b8;font-size:12.5px}
-.ix-move{background:#1a2430;color:#cfe0f2;border:1px solid #31445c;border-radius:9px;padding:7px 9px;font-size:13px;max-width:100%}
-.ix-note{width:100%;min-height:74px;background:#0d141c;color:#e7eef6;border:1px solid #2e4256;border-radius:11px;
-  padding:10px;font:14px/1.4 inherit;margin-top:6px;resize:vertical}
-.ix-notehdr{margin:16px 2px 2px;font-size:13px;color:#e8c05a;text-transform:uppercase;letter-spacing:.4px;
-  border-top:1px dashed #2e4256;padding-top:12px}
-.ix-bar{position:fixed;left:0;right:0;bottom:0;z-index:99;background:#0d141ceb;backdrop-filter:blur(8px);
-  border-top:1px solid #2e4256;padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:flex;gap:9px;align-items:center}
-.ix-bar b{font-size:13px;color:#8fa3b8;font-weight:500;flex:1;line-height:1.25}
-.ix-send{background:#2563eb;color:#fff;border:0;border-radius:11px;padding:11px 15px;font-size:14px;font-weight:700}
-.ix-reset{background:#1a2430;color:#8fa3b8;border:1px solid #31445c;border-radius:11px;padding:11px 12px;font-size:13px}
-body{padding-bottom:76px}
-.ix-ov{position:fixed;inset:0;z-index:200;background:#000a;display:flex;align-items:center;justify-content:center;padding:16px}
-.ix-modal{background:#101821;border:1px solid #2e4256;border-radius:16px;padding:16px;max-width:560px;width:100%}
-.ix-modal h3{margin:0 0 4px;font-size:16px}
-.ix-modal p{margin:0 0 10px;color:#8fa3b8;font-size:13px}
-.ix-out{width:100%;height:190px;background:#0d141c;color:#e7eef6;border:1px solid #2e4256;border-radius:11px;padding:10px;font:13px/1.4 ui-monospace,monospace;resize:vertical}
-.ix-mbtns{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
-.ix-mbtns .ix-send{text-decoration:none;text-align:center;display:inline-block}
-.ix-toast{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#137333;color:#fff;
-  padding:10px 16px;border-radius:11px;font-size:14px;z-index:100;max-width:90%;text-align:center}
-</style>
-
-<script id="ix-js">
-(function(){
- var GROUPS=[{id:"t1",t:"Montag, 10.08. T1 · „Vor der Haustür“ — Shinjuku"},{id:"t2",t:"Dienstag, 11.08. T2 · „Skytree & Ost-Tokio“ — Oshiage / Asakusa"},{id:"t3",t:"Mittwoch, 12.08. T3 · „Waschtag“ — alles unter Dach: Ueno / Akihabara / Shibuya Sky"},{id:"t4",t:"Donnerstag, 13.08. T4 · „Hafen & Nudeln“ — Yokohama"},{id:"t5",t:"Freitag, 14.08. T5 · „Markt, Kunst & Bucht“ — Tsukiji → Ginza → teamLab → Odaiba"},{id:"t6",t:"Samstag, 15.08. T6 · „Shogun-Grab im Zedernwald“ — Tagestrip Nikko"},{id:"tv",t:"„Viertel-Menü“ — weiter draußen, lohnt die Fahrt"},{id:"tk",t:"🎬 Kabukicho-Drehorte — optional, vor der Haustür"},{id:"tf",t:"„Food-Joker“ Tokio — frei einplanbar"},{id:"tt",t:"⏳ „Nicht geschafft“ — was diese Reise liegen blieb"},{id:"o0",t:"Sonntag, 16.08. K0 · „Ankommen“ — Umeda & erste Neon-Runde"},{id:"o1",t:"Montag, 17.08. K1 · „Neon-Nächte“ — Osaka Stadt"},{id:"o2",t:"Dienstag, 18.08. K2 · „Tempel-Marathon“ — Kyoto (fix)"},{id:"o3",t:"Mittwoch, 19.08. K3 · „Rehe & Bambus“ — Nara + Arashiyama"},{id:"o4",t:"Donnerstag, 20.08. K4 · „Burg & Beef“ — Himeji + Kobe"},{id:"o5",t:"Freitag, 21.08. K5 · „Sayonara Osaka“ — letzter Vormittag"},{id:"b0",t:"Samstag, 22.08. B0 · „Ankunft & Strand“ — Haeundae"},{id:"b1",t:"Sonntag, 23.08. B1 · „Stadt & Aussicht“ — Busan komplett"},{id:"s0",t:"Montag, 24.08. S0 · „Ankunft“ — Hongdae"},{id:"s1",t:"Dienstag, 25.08. S1 · „Altstadt-Ost & Baseball“"},{id:"s2",t:"Mittwoch, 26.08. S2 · „Palast-Klassiker“"},{id:"s3",t:"Donnerstag, 27.08. S3 · „Konkuk & Seongsu“ — Philips Revier"},{id:"s4",t:"Freitag, 28.08. S4 · „Markt & Turm“"},{id:"s5",t:"Samstag, 29.08. S5 · „Der letzte Tag“ — Incheon"},{id:"sv",t:"„Seoul-Menü“ — frei einplanbar"}], KEY="urlaub-planer-v1";
- var SITE="https://openclawkobian99.github.io/reiseplaner-jk26/";
- var S=JSON.parse(localStorage.getItem(KEY)||'{"done":{},"notes":{},"moved":{}}');
- // Gemeinsamer Stand, den Kai nach jedem Update ins Repo schreibt.
- // Beide Handys lesen ihn beim Öffnen -> Benni sieht, was Philip abgehakt hat.
- var SHARED={done:{},updated:null};
- function isDone(id){return !!(S.done[id]||SHARED.done[id]);}
- function isPending(id){return !!(S.done[id]&&!SHARED.done[id]);}
- function save(){localStorage.setItem(KEY,JSON.stringify(S));paint();}
- function cardName(c){var t=c.querySelector(".ttl");if(!t)return c.id;
-   var x=t.cloneNode(true);var s=x.querySelector("small");if(s)s.remove();
-   return x.textContent.replace(/\s+/g," ").trim();}
- function gTitle(id){for(var i=0;i<GROUPS.length;i++)if(GROUPS[i].id===id)return GROUPS[i].t;return id;}
-
- document.querySelectorAll("details.card").forEach(function(c){
-   var id=c.id.replace(/^c-/,""), gid=id.split("-")[0], sum=c.querySelector("summary");
-   // Haken links vor die Nummer
-   var b=document.createElement("span");
-   b.className="ix-chk"; b.textContent="";
-   b.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();
-     if(S.done[id])delete S.done[id];else S.done[id]=1;save();});
-   sum.insertBefore(b,sum.firstChild);
-   c.__chk=b;
-   // Verschieben-Menü unten in die Karte
-   var body=c.querySelector(".body"); if(!body)return;
-   var row=document.createElement("div"); row.className="ix-row";
-   var lab=document.createElement("label"); lab.textContent="Verschieben nach:";
-   var sel=document.createElement("select"); sel.className="ix-move";
-   sel.innerHTML='<option value="">— hier lassen —</option>'+GROUPS.map(function(g){
-     return '<option value="'+g.id+'">'+g.t+'</option>';}).join("");
-   sel.value=S.moved[id]||"";
-   sel.addEventListener("change",function(){
-     if(sel.value&&sel.value!==gid)S.moved[id]=sel.value;else delete S.moved[id];save();});
-   row.appendChild(lab);row.appendChild(sel);body.appendChild(row);
- });
-
- // Kommentarfeld je Tagesgruppe
- document.querySelectorAll("details.grp").forEach(function(g){
-   var gid=g.id.replace(/^g-/,""), body=g.querySelector(".gbody"); if(!body)return;
-   var h=document.createElement("h3"); h.className="ix-notehdr"; h.textContent="📝 Was wir sonst noch gemacht haben";
-   var ta=document.createElement("textarea"); ta.className="ix-note";
-   ta.placeholder="Notiz für Kai — Spots, Restaurants, was gut/schlecht war…";
-   ta.value=S.notes[gid]||"";
-   ta.addEventListener("input",function(){
-     if(ta.value.trim())S.notes[gid]=ta.value.trim();else delete S.notes[gid];
-     localStorage.setItem(KEY,JSON.stringify(S));paintBar();});
-   body.appendChild(h);body.appendChild(ta);
- });
-
- function paint(){
-   document.querySelectorAll("details.card").forEach(function(c){
-     var id=c.id.replace(/^c-/,"");
-     var on=isDone(id), pend=isPending(id);
-     if(c.__chk){c.__chk.dataset.on=on?"1":"0";c.__chk.dataset.pend=pend?"1":"0";
-       c.__chk.textContent=on?"✓":"";
-       c.__chk.title=pend?"abgehakt, aber noch nicht an Kai geschickt":(on?"bestätigt":"");}
-     c.classList.toggle("ix-done",on);
-     c.classList.toggle("ix-moved",!!S.moved[id]);
-   });
-   paintBar();
- }
- function paintBar(){
-   var all={},k;
-   for(k in SHARED.done)all[k]=1; for(k in S.done)all[k]=1;
-   var total=Object.keys(all).length;
-   var pend=Object.keys(S.done).filter(function(x){return !SHARED.done[x];}).length
-            +Object.keys(S.moved).length+Object.keys(S.notes).length;
-   document.getElementById("ix-count").textContent=
-     total+" abgehakt"+(SHARED.updated?" (Stand "+SHARED.updated+")":"")+
-     (pend?" · "+pend+" noch nicht gesendet":" · alles gesendet");
- }
-
- function payload(){
-   var L=["PLANER-UPDATE"],i;
-   var d=Object.keys(S.done);
-   if(d.length){L.push("");L.push("ERLEDIGT:");d.forEach(function(id){
-     var c=document.getElementById("c-"+id);L.push("- "+(c?cardName(c):id));});}
-   var m=Object.keys(S.moved);
-   if(m.length){L.push("");L.push("VERSCHIEBEN:");m.forEach(function(id){
-     var c=document.getElementById("c-"+id);
-     L.push("- "+(c?cardName(c):id)+" -> "+gTitle(S.moved[id]));});}
-   var n=Object.keys(S.notes);
-   if(n.length){L.push("");L.push("NOTIZEN:");n.forEach(function(gid){
-     L.push("["+gTitle(gid)+"] "+S.notes[gid]);});}
-   if(L.length===1)L.push("(nichts markiert)");
-   return L.join("\n");
- }
-
- function toast(t){var e=document.createElement("div");e.className="ix-toast";e.textContent=t;
-   document.body.appendChild(e);setTimeout(function(){e.remove();},3200);}
-
- var bar=document.createElement("div"); bar.className="ix-bar";
- bar.innerHTML='<b id="ix-count"></b>'+
-   '<button class="ix-reset" id="ix-reset">Zurücksetzen</button>'+
-   '<button class="ix-send" id="ix-send">📤 An Kai</button>';
- document.body.appendChild(bar);
-
- // Ausweg-Dialog: Text zum Kopieren + direkter Telegram-Link.
- // Wird gebraucht, weil der t.me-Deeplink am iPhone nicht zuverlässig aufgeht
- // (Philip 10.08.2026) — Teilen-Dialog des Systems ist der verlässliche Weg.
- function showBox(txt){
-   var ov=document.createElement("div"); ov.className="ix-ov";
-   var tg="https://t.me/share/url?url="+encodeURIComponent(SITE)+"&text="+encodeURIComponent(txt);
-   ov.innerHTML='<div class="ix-modal"><h3>Update an Kai</h3>'+
-     '<p>Text markieren und kopieren, dann in die Gruppe einfügen — oder einen der Knöpfe nehmen.</p>'+
-     '<textarea class="ix-out" readonly></textarea>'+
-     '<div class="ix-mbtns">'+
-       '<button class="ix-send" id="ix-copy">Kopieren</button>'+
-       '<a class="ix-send" href="'+tg+'" target="_blank" rel="noopener">In Telegram öffnen</a>'+
-       '<button class="ix-reset" id="ix-close">Schließen</button>'+
-     '</div></div>';
-   document.body.appendChild(ov);
-   var ta=ov.querySelector(".ix-out"); ta.value=txt;
-   ov.querySelector("#ix-copy").addEventListener("click",function(){
-     ta.focus(); ta.setSelectionRange(0,ta.value.length);
-     var ok=false; try{ok=document.execCommand("copy");}catch(e){}
-     if(!ok&&navigator.clipboard)navigator.clipboard.writeText(txt).then(function(){toast("Kopiert.");});
-     else toast(ok?"Kopiert.":"Bitte von Hand markieren und kopieren.");
-   });
-   ov.querySelector("#ix-close").addEventListener("click",function(){ov.remove();});
-   ov.addEventListener("click",function(e){if(e.target===ov)ov.remove();});
- }
-
- document.getElementById("ix-send").addEventListener("click",function(){
-   var txt=payload();
-   // Systemeigener Teilen-Dialog — direkt im Klick, ohne setTimeout, sonst
-   // wertet iOS es nicht mehr als Nutzeraktion und blockt.
-   if(navigator.share){
-     navigator.share({title:"Planer-Update",text:txt})
-       .then(function(){toast("Geteilt — in Telegram die Gruppe wählen.");})
-       .catch(function(){showBox(txt);});
-     return;
-   }
-   showBox(txt);
- });
- document.getElementById("ix-reset").addEventListener("click",function(){
-   if(!confirm("Alle Haken, Notizen und Verschiebungen löschen?"))return;
-   S={done:{},notes:{},moved:{}};
-   document.querySelectorAll(".ix-note").forEach(function(t){t.value="";});
-   document.querySelectorAll(".ix-move").forEach(function(s){s.value="";});
-   save();
- });
- paint();
-
- // Gemeinsamen Stand nachladen (Cache umgehen, sonst zeigt iOS tagelang alte Daten)
- fetch("state.json?cb="+Date.now(),{cache:"no-store"})
-   .then(function(r){return r.ok?r.json():null;})
-   .then(function(j){if(!j)return;SHARED.done=j.done||{};SHARED.updated=j.updated||null;paint();})
-   .catch(function(){});
-})();
-</script>
-</body></html>
+</script></body></html>
